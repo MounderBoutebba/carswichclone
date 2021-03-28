@@ -1,0 +1,165 @@
+{
+  "header": {
+    "connect": "Se Connecter",
+    "deconecter": "Deconecter",
+    "home": "Acceuil",
+    "about": "À propos",
+    "createCar": "Créer une voiture",
+    "contact": "Contact",
+    "search": "chercher",
+    "ar": "ar",
+    "fr": "fr"
+  },
+
+  "hero": {
+    "slogan": "car switch",
+    "title": "titre de bienvenue",
+    "text-right": " text",
+    "price_up": "additionnelle",
+    "price_upp": " text",
+    "price_info": " text",
+    "price_down": " text",
+    "Sellcar": "Vendre une voiture",
+    "BuyCar": "Acheter une voiture"
+  },
+
+  "transmission": {
+    "transmission": "Transmission",
+    "automatic": "automatique",
+    "manual": "manuelle",
+    "tiptronic": "tiptronic"
+  },
+
+  "bodyType": {
+    "bodyType": "Body Type",
+    "sedan": "sedan",
+    "suv": "suv",
+    "coupe": "coupe",
+    "hatchback": "hatchback",
+    "convertible": "convertible",
+    "wagon": "wagon",
+    "pickup": "pickup",
+    "minivan": "minivan",
+    "van": "van"
+  },
+
+  "deal": {
+    "deal": "Accord",
+    "fantastic_deal": "offre fantastique",
+    "from_agency": "de l'agence"
+  },
+
+  "document": {
+    "document": "document",
+    "carte_grise": "carte grise",
+    "carte_jaune": "carte jaune",
+    "licence": "licence"
+  },
+
+  "energy": {
+    "energy": "Type de carburant",
+    "ess": "essence",
+    "diesel": "diesel",
+    "hybride": "hybride"
+  },
+
+  "color": {
+    "color": "color",
+    "BodyColor": "Body Color",
+    "white": "blanc",
+    "black": "noir",
+    "grey": "Gris",
+    "silver": "argent",
+    "red": "rouge",
+    "blue": "bleu",
+    "brown": "marron",
+    "burngundy": "Bourgogne",
+    "green": "vert",
+    "orange": "orange",
+    "yellow": "jaune",
+    "purple": "violet"
+  },
+
+  "carInfo": {
+    "sendBtn": "Envoyer maintenant",
+    "engine": "Moteur",
+    "EnginePower": "Puissance du moteur:",
+    "HorsePower": "hp",
+    "year": "Année",
+    "Roof": "Toit",
+    "DriveType": "Drive Type",
+    "Mileage": "Kilométrage",
+    "status": "status",
+    "seats": "places",
+    "NbrSeats": "nombre de places",
+    "MessageAgency": "message à l'agence",
+    "ContactAgency": "Contacter l'agence",
+    "VehicleSpecifications": "Spécifications du véhicule",
+    "Vehicledetails": "Les détails du véhicule",
+    "title": "new seventh-generation 3 Series sedan",
+    "subTitle": "BMW 3 Series 2019",
+    "BrandModel": "Modèle / marque"
+  },
+
+  "listing": {
+    "Searchcar": "Rechercher une voiture",
+    "VehicleListings": "Liste des véhicules",
+    "Inventory": "Inventaire",
+    "ResetFilters": "Réinitialiser les filtres",
+    "showresults": "résultats",
+    "Showingresults": "Affichage des résultats",
+    "to": "à",
+    "oftotal": "Du total"
+  },
+
+  "login": {
+    "Connexion": "Connexion",
+    "Inscription": "Inscription",
+    "motoublié": "mot de passe oublié?"
+  },
+
+  "register": {
+    "account": "Déja un compte?",
+    "inscrire": " S'Inscrire"
+  },
+  "confirm": {
+    "confirm": "Confirmer votre",
+    "text": "vérifiez votre adresse email puis activez votre compte afin d'être capable d'y accéder",
+    "email": "E-mail"
+  },
+  "required": {
+    "pw": "Mot de passe requis",
+    "pwConfirm": "la confirmation du mot de passe est requise",
+    "email": "Email est requis",
+    "emailValid": "L'e-mail n'est pas une adresse e-mail valide",
+    "fn": "Le prénom est requis",
+    "name": "Le nom est obligatoire",
+    "phone": "le téléphone est requis",
+    "birthday": "Date de naissance est obligatoire",
+    "city": "La ville est obligatoire",
+    "adress": "l'adresse est requise",
+    "country": "Le pays est requis",
+    "post": "Le code postal est requis"
+  },
+  "select": {
+    "wilaya": "wilaya",
+    "color": "color",
+    "body": "body",
+    "transmission": "transmission",
+    "fuel": "carburant",
+    "document": "document"
+  },
+  "placeholder": {
+    "pw": "Mot de passe ",
+    "pwConfirm": "confirmation du mot de passe ",
+    "email": "Email",
+    "fn": "prénom",
+    "name": "nom",
+    "phone": "téléphone",
+    "birthday": "Date de naissance",
+    "city": "La ville",
+    "adress": "l'adresse",
+    "country": "Le pays",
+    "post": "Le code postal"
+  }
+}

@@ -1,0 +1,84 @@
+<!-- end .b-title-page-->
+<main class="mb-4">
+  <div class="container">
+    <div class="d-flex justify-content-center">
+      <div class="col-md-6">
+        <section class="section-form-contacts">
+          <h2 class="ui-title-inner">{{ "login.Connexion" | translate }}</h2>
+          <div id="success"></div>
+          <form
+            [formGroup]="form"
+            (ngSubmit)="onSubmit()"
+            class="b-form-contacts ui-form"
+            id="contactForm"
+            action="#"
+            method="post"
+          >
+            <div class="form-group">
+              <input
+                [ngClass]="{ 'is-invalid': submitted && formctrl.email.errors }"
+                formControlName="email"
+                class="form-control"
+                id="email"
+                type="email"
+                name="user-email"
+                placeholder="email"
+              />
+              <div
+                *ngIf="submitted && formctrl.email.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="formctrl.email.errors.required">
+                  {{ "required.email" | translate }}
+                </div>
+                <div *ngIf="formctrl.email.errors.email">
+                  {{ "required.emailValid" | translate }}
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <input
+                [ngClass]="{
+                  'is-invalid': submitted && formctrl.password.errors
+                }"
+                formControlName="password"
+                class="form-control"
+                id="password"
+                type="password"
+                name="password"
+                placeholder="password"
+              />
+              <div
+                *ngIf="submitted && formctrl.password.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.password.errors.required">
+                  {{ "required.pw" | translate }}
+                </div>
+              </div>
+            </div>
+            <div *ngIf="submitted && error">
+              <div class="invalid-form">{{ errorMessage }}</div>
+            </div>
+            <div class="d-flex justify-content-end">
+              <button class="btn btn-primary mr-2">
+                {{ "login.Connexion" | translate }}
+              </button>
+              <a routerLink="/register"
+                ><button class="btn btn-dark">
+                  {{ "login.Inscription" | translate }}
+                </button></a
+              >
+            </div>
+            <a href=""
+              ><p class="float-right d-block mt-4">
+                {{ "login.motoublié" | translate }}
+              </p></a
+            >
+          </form>
+        </section>
+        <!-- end .b-form-contact-->
+      </div>
+    </div>
+  </div>
+</main>

@@ -1,0 +1,316 @@
+<!-- end .b-title-page-->
+<main class="mb-4">
+  <div class="container">
+    <div class="d-flex justify-content-center">
+      <div class="col-md-6">
+        <section class="section-form-contacts">
+          <h2 class="ui-title-inner">Create car</h2>
+          <div id="success"></div>
+          <form
+            [formGroup]="form"
+            (ngSubmit)="onSubmit()"
+            class="b-form-contacts ui-form"
+            id="contactForm"
+            action="#"
+            method="post"
+          >
+            <div class="form-group">
+              <input
+                [ngClass]="{
+                  'is-invalid': submitted && formctrl.first_name.errors
+                }"
+                formControlName="first_name"
+                class="form-control"
+                id="first_name"
+                type="text"
+                name="first_name"
+                placeholder="Prénom"
+              />
+              <div
+                *ngIf="submitted && formctrl.first_name.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="formctrl.first_name.errors.required">
+                  first_name is required
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <input
+                [ngClass]="{
+                  'is-invalid': submitted && formctrl.last_name.errors
+                }"
+                formControlName="last_name"
+                class="form-control"
+                id="last_name"
+                type="text"
+                name="last_name"
+                placeholder="Nom"
+              />
+              <div
+                *ngIf="submitted && formctrl.last_name.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="formctrl.last_name.errors.required">
+                  last_name is required
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <input
+                [ngClass]="{ 'is-invalid': submitted && formctrl.email.errors }"
+                formControlName="email"
+                class="form-control"
+                id="email"
+                type="email"
+                name="user-email"
+                placeholder="email"
+              />
+              <div
+                *ngIf="submitted && formctrl.email.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="formctrl.email.errors.required">
+                  Email is required
+                </div>
+                <div *ngIf="formctrl.email.errors.email">
+                  Email is not a valid email address
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <input
+                [ngClass]="{
+                  'is-invalid': submitted && formctrl.password.errors
+                }"
+                formControlName="password"
+                class="form-control"
+                id="password"
+                type="password"
+                name="password"
+                placeholder="Mot de passe"
+              />
+              <div
+                *ngIf="submitted && formctrl.password.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="formctrl.password.errors.required">
+                  Password is required
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <input
+                [ngClass]="{
+                  'is-invalid':
+                    submitted && formctrl.password_confirmation.errors
+                }"
+                formControlName="password_confirmation"
+                class="form-control"
+                id="repeat_password"
+                type="password"
+                name="repeat_password"
+                placeholder="Répéter le mot de passe"
+              />
+              <div
+                *ngIf="submitted && formctrl.password_confirmation.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="formctrl.password_confirmation.errors.required">
+                  password_confirmation is required
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <input
+                [ngClass]="{ 'is-invalid': submitted && formctrl.phone.errors }"
+                formControlName="phone"
+                class="form-control"
+                id="phone"
+                type="text"
+                name="phone"
+                placeholder="phone"
+              />
+              <div
+                *ngIf="submitted && formctrl.phone.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="formctrl.phone.errors.required">
+                  phone is required
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <input
+                [ngClass]="{
+                  'is-invalid': submitted && formctrl.birthday.errors
+                }"
+                formControlName="birthday"
+                class="form-control"
+                id="birthday"
+                type="text"
+                name="birthday"
+                placeholder="birthday"
+              />
+              <div
+                *ngIf="submitted && formctrl.birthday.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="formctrl.birthday.errors.required">
+                  birthday is required
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <input
+                [ngClass]="{ 'is-invalid': submitted && formctrl.city.errors }"
+                formControlName="city"
+                class="form-control"
+                id="city"
+                type="text"
+                name="city"
+                placeholder="city"
+              />
+              <div
+                *ngIf="submitted && formctrl.city.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="formctrl.city.errors.required">
+                  city is required
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <input
+                [ngClass]="{
+                  'is-invalid': submitted && formctrl.address.errors
+                }"
+                formControlName="address"
+                class="form-control"
+                id="address"
+                type="text"
+                name="address"
+                placeholder="address"
+              />
+              <div
+                *ngIf="submitted && formctrl.address.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="formctrl.address.errors.required">
+                  address is required
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <input
+                [ngClass]="{
+                  'is-invalid': submitted && formctrl.country.errors
+                }"
+                formControlName="country"
+                class="form-control"
+                id="country"
+                type="text"
+                name="country"
+                placeholder="country"
+              />
+              <div
+                *ngIf="submitted && formctrl.country.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="formctrl.country.errors.required">
+                  country is required
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <input
+                [ngClass]="{
+                  'is-invalid': submitted && formctrl.post_code.errors
+                }"
+                formControlName="post_code"
+                class="form-control"
+                id="post_code"
+                type="text"
+                name="post_code"
+                placeholder="post_code"
+              />
+              <div
+                *ngIf="submitted && formctrl.post_code.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="formctrl.post_code.errors.required">
+                  post_code is required
+                </div>
+              </div>
+            </div>
+            <div class="d-flex justify-content-end">
+              <button class="btn btn-primary mr-2" type="submit">
+                S'Inscrire
+              </button>
+            </div>
+            <p class="float-right d-block mt-4">
+              Déja un compte?<a routerLink="login"> se connecter</a>
+            </p>
+          </form>
+        </section>
+        <!-- end .b-form-contact-->
+      </div>
+    </div>
+  </div>
+</main>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h2 class="typography-title">Form Elements</h2>
+      <div class="row">
+        <div class="col-12">
+          <form class="ui-form" action="#" method="post">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <input class="form-control" type="text" placeholder="Name" />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <input
+                    class="form-control"
+                    type="email"
+                    placeholder="Email"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <div class="form-group">
+                  <input
+                    class="form-control"
+                    type="url"
+                    placeholder="Website"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <div class="form-group">
+                  <textarea class="form-control" rows="6"></textarea>
+                </div>
+                <div class="form-group">
+                  <button class="btn btn-primary">Send Message</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

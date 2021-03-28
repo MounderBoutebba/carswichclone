@@ -1,0 +1,436 @@
+<div class="section-title-page area-bg area-bg_dark area-bg_op_60">
+  <div class="area-bg__inner">
+    <div class="container">
+      <div class="row">
+        <div class="col offset-lg-3">
+          <div class="b-title-page__wrap">
+            <h1 class="b-title-page">
+              {{ "listing.VehicleListings" | translate }}
+            </h1>
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                  <a href="home.html">{{ "header.home" | translate }}</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">
+                  {{ "listing.Inventory" | translate }}
+                </li>
+              </ol>
+              <!-- end breadcrumb-->
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end .b-title-page-->
+<div class="l-main-content">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3">
+        <aside class="l-sidebar">
+          <div class="widget section-sidebar bg-light">
+            <h3 class="widget-title bg-dark">
+              <i class="ic flaticon-car-4"></i
+              >{{ "listing.Searchcar" | translate }}
+            </h3>
+            <div class="widget-content">
+              <div class="widget-inner">
+                <form
+                  class="b-filter bg-light"
+                  [formGroup]="myForm"
+                  (ngSubmit)="getCars(1)"
+                >
+                  <div class="b-filter__main">
+                    <!-- <div class="b-filter__row row">
+                      <div class="b-filter__item col-md-12 col-lg-12 col-xl-12">
+                        <input
+                          formControlName="searchTerm"
+                          class="ui-select-custom"
+                          placeholder="Search"
+                          style="width: 100%"
+                          type="search"
+                        />
+                      </div>
+                    </div> -->
+                    <div class="b-filter__row">
+                      <select
+                        formControlName="bodyTypeSelected"
+                        class="selectpicker"
+                        data-width="100%"
+                        title="{{ 'select.body' | translate }}"
+                        data-max-options="1"
+                        data-style="ui-select"
+                      >
+                        <option
+                          *ngFor="let item of bodyTypes | keyvalue"
+                          [ngValue]="item.key"
+                        >
+                          {{ "bodyType." + item.key | translate }}
+                        </option>
+                      </select>
+                    </div>
+                    <div class="b-filter__row">
+                      <select
+                        formControlName="color"
+                        class="selectpicker"
+                        data-width="100%"
+                        title="{{ 'select.color' | translate }}"
+                        data-max-options="1"
+                        data-style="ui-select"
+                      >
+                        <option *ngFor="let item of colors" [ngValue]="item.id">
+                          {{ "color." + item.name | translate }}
+                        </option>
+                      </select>
+                    </div>
+                    <div class="b-filter__row">
+                      <select
+                        formControlName="wilaya"
+                        class="selectpicker"
+                        data-width="100%"
+                        title="{{ 'select.wilaya' | translate }}"
+                        data-max-options="1"
+                        data-style="ui-select"
+                      >
+                        <option
+                          *ngFor="let item of wilayas"
+                          [ngValue]="item.id"
+                        >
+                          <span *ngIf="currentLanguage == 'fr'">{{
+                            item.name_fr
+                          }}</span>
+                          <span *ngIf="currentLanguage == 'ar'">{{
+                            item.name_ar
+                          }}</span>
+                        </option>
+                      </select>
+                    </div>
+                    <div class="b-filter-slider ui-filter-slider">
+                      <div class="b-filter-slider__title">Year</div>
+                      <div class="b-filter-slider__main">
+                        <div id="filterYear"></div>
+                        <div class="b-filter__row row">
+                          <div
+                            class="b-filter__item col-md-6 col-lg-12 col-xl-6"
+                          >
+                            <input
+                              formControlName="yearStart"
+                              class="ui-select"
+                              id="input-with-keypress-0-year"
+                              type="number"
+                              max="2021"
+                              min="1970"
+                            />
+                          </div>
+                          <div
+                            class="b-filter__item col-md-6 col-lg-12 col-xl-6"
+                          >
+                            <input
+                              formControlName="yearEnd"
+                              class="ui-select"
+                              id="input-with-keypress-1-year"
+                              type="number"
+                              min="1970"
+                              max="2021"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="b-filter__row">
+                      <select
+                        formControlName="transmissionSelected"
+                        class="selectpicker"
+                        data-width="100%"
+                        title="{{ 'select.transmission' | translate }}"
+                        data-max-options="1"
+                        data-style="ui-select"
+                      >
+                        <option
+                          *ngFor="let item of transmissionType | keyvalue"
+                          [ngValue]="item.value"
+                        >
+                          {{ "transmission." + item.value | translate }}
+                        </option>
+                      </select>
+                    </div>
+                    <div class="b-filter__row">
+                      <select
+                        formControlName="energySelected"
+                        class="selectpicker"
+                        data-width="100%"
+                        title="{{ 'select.fuel' | translate }}"
+                        data-max-options="1"
+                        data-style="ui-select"
+                      >
+                        <option
+                          *ngFor="let item of energyType | keyvalue"
+                          [ngValue]="item.value"
+                        >
+                          {{ "energy." + item.value | translate }}
+                        </option>
+                      </select>
+                    </div>
+
+                    <div class="b-filter__row">
+                      <select
+                        formControlName="documentSelected"
+                        class="selectpicker"
+                        data-width="100%"
+                        title="{{ 'select.document' | translate }}"
+                        data-max-options="1"
+                        data-style="ui-select"
+                      >
+                        <option
+                          *ngFor="let item of documentType | keyvalue"
+                          [ngValue]="item.key"
+                        >
+                          {{ "document." + item.key | translate }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="b-filter-slider ui-filter-slider">
+                    <div class="b-filter-slider__title">Price</div>
+                    <div class="b-filter-slider__main">
+                      <!-- <div id="filterPrice"></div> -->
+                      <div class="b-filter__row row">
+                        <div class="b-filter__item col-md-6 col-lg-12 col-xl-6">
+                          <input
+                            formControlName="priceMin"
+                            class="ui-select"
+                            id="input-with-keypress-0"
+                            type="number"
+                          />
+                        </div>
+                        <div class="b-filter__item col-md-6 col-lg-12 col-xl-6">
+                          <input
+                            formControlName="priceMax"
+                            class="ui-select"
+                            id="input-with-keypress-1"
+                            type="number"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <button
+                    class="b-filter__reset btn btn-default w-100"
+                    type="button"
+                    (click)="resset()"
+                  >
+                    {{ "listing.ResetFilters" | translate }}
+                  </button>
+                  <button class="btn btn-primary w-100" type="submit">
+                    {{ "listing.showresults" | translate }}
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+          <!-- end .b-filter-->
+        </aside>
+      </div>
+      <div class="col-lg-9">
+        <div class="b-filter-goods">
+          <div class="row justify-content-between align-items-center">
+            <!-- <div class="b-filter-goods__wrap col-auto">
+              <div class="b-filter-goods__select">
+                <select
+                  class="selectpicker"
+                  data-width="100%"
+                  title="Newest First"
+                  data-max-options="1"
+                  data-style="ui-select"
+                >
+                  <option>A-Z</option>
+                  <option>Z-A</option>
+                </select>
+              </div>
+            </div> -->
+            <div class="b-filter-goods__info col-auto">
+              {{ "listing.Showingresults" | translate
+              }}<strong>
+                {{ carResponse.from }}
+                {{ "listing.to" | translate }}
+                {{ carResponse.to }}</strong
+              >
+              {{ "listing.oftotal" | translate
+              }}<strong> {{ carResponse.total }}</strong>
+            </div>
+            <div class="btns-switch col-auto">
+              <i
+                class="btns-switch__item js-view-list active ic fa fa-th-list"
+              ></i
+              ><i class="btns-switch__item js-view-th ic fa fa-th"></i>
+            </div>
+          </div>
+        </div>
+        <!-- end .b-filter-goods-->
+        <main class="b-goods-group row">
+          <div *ngFor="let car of cars" class="b-goods-f col-12 b-goods-f_row">
+            <div class="b-goods-f__media">
+              <!-- <img
+                *ngIf="car.pictures !== null"
+                class="b-goods-f__img img-scale"
+                src="{{ car.pictures[0] }}"
+                alt="foto"
+              /> -->
+              <img
+                *ngIf="car.pictures == null"
+                class="b-goods-f__img img-scale"
+                src="assets/media/content/b-goods/300x220/3.jpg"
+                alt="foto"
+              /><span class="b-goods-f__media-inner"
+                ><span class="b-goods-f__favorite"
+                  ><i class="ic far fa-star"></i></span
+                ><span class="b-goods-f__label bg-primary staticInfo"
+                  >NEW</span
+                ></span
+              >
+            </div>
+            <div class="b-goods-f__main">
+              <div class="b-goods-f__descrip">
+                <div
+                  class="b-goods-f__title clickable staticInfo"
+                  (click)="getCarDetails(car, car.color.name)"
+                >
+                  Audi L35 Quattro
+                </div>
+                <div class="b-goods-f__info">
+                  {{ car.information }}
+                </div>
+                <ul class="b-goods-f__list list-unstyled">
+                  <li class="b-goods-f__list-item">
+                    <span class="b-goods-f__list-title"
+                      >{{ "carInfo.Roof" | translate }} :</span
+                    ><span class="b-goods-f__list-info">{{ car.roof }}</span>
+                  </li>
+                  <li class="b-goods-f__list-item">
+                    <span class="b-goods-f__list-title"
+                      >{{ "carInfo.year" | translate }} :</span
+                    ><span class="b-goods-f__list-info">{{ car.year }}</span>
+                  </li>
+                  <li class="b-goods-f__list-item">
+                    <span class="b-goods-f__list-title"
+                      >{{ "transmission.transmission" | translate }} :</span
+                    ><span class="b-goods-f__list-info">
+                      {{ "transmission." + car.transmistion | translate }}
+                    </span>
+                  </li>
+                  <li class="b-goods-f__list-item b-goods-f__list-item_row">
+                    <span class="b-goods-f__list-title"
+                      >{{ "bodyType.bodyType" | translate }} :</span
+                    ><span class="b-goods-f__list-info">
+                      {{ "bodyType." + car.body | translate }}</span
+                    >
+                  </li>
+                  <li class="b-goods-f__list-item">
+                    <span class="b-goods-f__list-title"
+                      >{{ "energy.energy" | translate }} :</span
+                    ><span class="b-goods-f__list-info">{{
+                      "energy." + car.energy | translate
+                    }}</span>
+                  </li>
+                  <li class="b-goods-f__list-item b-goods-f__list-item_row">
+                    <span class="b-goods-f__list-title"
+                      >{{ "carInfo.EnginePower" | translate }} </span
+                    ><span class="b-goods-f__list-info"
+                      >{{ car.horse_power }}
+                      {{ "carInfo.HorsePower" | translate }}
+                    </span>
+                  </li>
+                  <li class="b-goods-f__list-item b-goods-f__list-item_row">
+                    <span class="b-goods-f__list-title"
+                      >{{ "color.color" | translate }} :</span
+                    ><span class="b-goods-f__list-info">
+                      {{ "color." + car.color.name | translate }}
+                    </span>
+                  </li>
+                  <li class="b-goods-f__list-item b-goods-f__list-item_row">
+                    <span class="b-goods-f__list-title"
+                      >{{ "carInfo.DriveType" | translate }} :</span
+                    ><span class="b-goods-f__list-info">{{
+                      car.drive_type
+                    }}</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="b-goods-f__sidebar staticInfo">
+                <a class="b-goods-f__bnr" href="#"
+                  ><img
+                    src="assets/media/content/b-goods/auto-check.png"
+                    alt="auto check" /></a
+                ><span class="b-goods-f__price-group"
+                  ><span class="b-goods-f__price"
+                    ><span class="b-goods-f__price_col">msrp:&nbsp;</span
+                    ><span
+                      *ngIf="car.sold_at !== null"
+                      class="b-goods-f__price-numb"
+                      >{{ car.sold_at }}</span
+                    ><span
+                      *ngIf="car.sold_at == null"
+                      class="b-goods-f__price-numb"
+                    >
+                      ---
+                    </span></span
+                  ></span
+                >
+                <div class="b-goods-f__imprest">
+                  Est. Down Payment:
+                  {{ car.sold_at !== null ? car.sold_at : "---" }}
+                </div>
+                <!-- <span class="b-goods-f__compare"
+                  >Compare<i class="ic fas fa-columns"></i
+                ></span> -->
+              </div>
+            </div>
+          </div>
+
+          <!-- end .b-goods-->
+        </main>
+        <nav aria-label="Page navigation">
+          <ul class="pagination justify-content-center">
+            <li class="page-item">
+              <button class="page-link" (click)="getPage(1)" aria-label="Next">
+                <span
+                  class="ic fas fa-angle-double-left"
+                  aria-hidden="true"
+                ></span>
+              </button>
+            </li>
+            <li class="page-item">
+              <button class="page-link" (click)="getPage(currentPage - 1)">
+                {{ currentPage - 1 }}
+              </button>
+            </li>
+            <li class="page-item active" aria-current="page">
+              <button class="page-link">{{ currentPage }}</button>
+            </li>
+            <li class="page-item">
+              <button class="page-link" (click)="getPage(currentPage + 1)">
+                {{ currentPage + 1 }}
+              </button>
+            </li>
+            <li class="page-item">
+              <button
+                class="page-link"
+                aria-label="Next"
+                (click)="getPage(lastPage)"
+              >
+                <span
+                  class="ic fas fa-angle-double-right"
+                  aria-hidden="true"
+                ></span>
+              </button>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>

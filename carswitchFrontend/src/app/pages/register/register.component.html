@@ -1,0 +1,269 @@
+<!-- end .b-title-page-->
+<main class="mb-4">
+  <div class="container">
+    <div class="d-flex justify-content-center">
+      <div class="col-md-6">
+        <section class="section-form-contacts">
+          <h2 class="ui-title-inner">
+            {{ "login.Inscription" | translate }}
+          </h2>
+          <div id="success"></div>
+          <form
+            [formGroup]="form"
+            (ngSubmit)="onSubmit()"
+            class="b-form-contacts ui-form"
+            id="contactForm"
+            action="#"
+            method="post"
+          >
+            <div class="form-group">
+              <input
+                [ngClass]="{
+                  'is-invalid': submitted && formctrl.first_name.errors
+                }"
+                formControlName="first_name"
+                class="form-control"
+                id="first_name"
+                type="text"
+                name="first_name"
+                placeholder="{{ 'placeholder.fn' | translate }}"
+              />
+              <div
+                *ngIf="submitted && formctrl.first_name.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="formctrl.first_name.errors.required">
+                  {{ "required.fn" | translate }}
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <input
+                [ngClass]="{
+                  'is-invalid': submitted && formctrl.last_name.errors
+                }"
+                formControlName="last_name"
+                class="form-control"
+                id="last_name"
+                type="text"
+                name="last_name"
+                placeholder="{{ 'placeholder.name' | translate }}"
+              />
+              <div
+                *ngIf="submitted && formctrl.last_name.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="formctrl.last_name.errors.required">
+                  {{ "required.name" | translate }}
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <input
+                [ngClass]="{ 'is-invalid': submitted && formctrl.email.errors }"
+                formControlName="email"
+                class="form-control"
+                id="email"
+                type="email"
+                name="user-email"
+                placeholder="{{ 'placeholder.email' | translate }}"
+              />
+              <div
+                *ngIf="submitted && formctrl.email.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="formctrl.email.errors.required">
+                  {{ "required.email" | translate }}
+                </div>
+                <div *ngIf="formctrl.email.errors.email">
+                  {{ "required.emailValid" | translate }}
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <input
+                [ngClass]="{
+                  'is-invalid': submitted && formctrl.password.errors
+                }"
+                formControlName="password"
+                class="form-control"
+                id="password"
+                type="password"
+                name="password"
+                placeholder="{{ 'placeholder.pw' | translate }}"
+              />
+              <div
+                *ngIf="submitted && formctrl.password.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="formctrl.password.errors.required">
+                  {{ "required.pw" | translate }}
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <input
+                [ngClass]="{
+                  'is-invalid':
+                    submitted && formctrl.password_confirmation.errors
+                }"
+                formControlName="password_confirmation"
+                class="form-control"
+                id="repeat_password"
+                type="password"
+                name="repeat_password"
+                placeholder="{{ 'placeholder.pwConfirm' | translate }}"
+              />
+              <div
+                *ngIf="submitted && formctrl.password_confirmation.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="formctrl.password_confirmation.errors.required">
+                  {{ "required.pwConfirm" | translate }}
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <input
+                [ngClass]="{ 'is-invalid': submitted && formctrl.phone.errors }"
+                formControlName="phone"
+                class="form-control"
+                id="phone"
+                type="text"
+                name="phone"
+                placeholder="{{ 'placeholder.phone' | translate }}"
+              />
+              <div
+                *ngIf="submitted && formctrl.phone.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="formctrl.phone.errors.required">
+                  {{ "required.phone" | translate }}
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <input
+                [ngClass]="{
+                  'is-invalid': submitted && formctrl.birthday.errors
+                }"
+                formControlName="birthday"
+                class="form-control"
+                id="birthday"
+                type="text"
+                name="birthday"
+                placeholder="{{ 'placeholder.birthday' | translate }}"
+              />
+              <div
+                *ngIf="submitted && formctrl.birthday.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="formctrl.birthday.errors.required">
+                  {{ "required.birthday" | translate }}
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <input
+                [ngClass]="{ 'is-invalid': submitted && formctrl.city.errors }"
+                formControlName="city"
+                class="form-control"
+                id="city"
+                type="text"
+                name="city"
+                placeholder="{{ 'placeholder.city' | translate }}"
+              />
+              <div
+                *ngIf="submitted && formctrl.city.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="formctrl.city.errors.required">
+                  {{ "required.city" | translate }}
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <input
+                [ngClass]="{
+                  'is-invalid': submitted && formctrl.address.errors
+                }"
+                formControlName="address"
+                class="form-control"
+                id="address"
+                type="text"
+                name="address"
+                placeholder="{{ 'placeholder.adress' | translate }}"
+              />
+              <div
+                *ngIf="submitted && formctrl.address.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="formctrl.address.errors.required">
+                  {{ "required.adress" | translate }}
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <input
+                [ngClass]="{
+                  'is-invalid': submitted && formctrl.country.errors
+                }"
+                formControlName="country"
+                class="form-control"
+                id="country"
+                type="text"
+                name="country"
+                placeholder="{{ 'placeholder.country' | translate }}"
+              />
+              <div
+                *ngIf="submitted && formctrl.country.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="formctrl.country.errors.required">
+                  {{ "required.country" | translate }}
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <input
+                [ngClass]="{
+                  'is-invalid': submitted && formctrl.post_code.errors
+                }"
+                formControlName="post_code"
+                class="form-control"
+                id="post_code"
+                type="text"
+                name="post_code"
+                placeholder="{{ 'placeholder.post' | translate }}"
+              />
+              <div
+                *ngIf="submitted && formctrl.post_code.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="formctrl.post_code.errors.required">
+                  {{ "required.post" | translate }}
+                </div>
+              </div>
+            </div>
+            <div class="d-flex justify-content-end">
+              <button class="btn btn-primary mr-2" type="submit">
+                {{ "register.inscrire" | translate }}
+              </button>
+            </div>
+            <p class="float-right d-block mt-4">
+              {{ "register.account" | translate
+              }}<a routerLink="login"> {{ "header.connect" | translate }}</a>
+            </p>
+          </form>
+        </section>
+        <!-- end .b-form-contact-->
+      </div>
+    </div>
+  </div>
+</main>

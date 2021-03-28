@@ -1,0 +1,165 @@
+{
+  "header": {
+    "connect": "تسجيل الدخول",
+    "deconecter": "تسجيل خروج",
+    "home": "الصفحة الرئيسية",
+    "about": "حول",
+    "createCar": "اصنع سيارة",
+    "contact": "اتصال",
+    "search": "بحث",
+    "ar": "ar",
+    "fr": "fr"
+  },
+
+  "hero": {
+    "slogan": "تبديل السيارة",
+    "title": "عنوان ترحيب",
+    "text-right": " هؤلاء الذين",
+    "price_up": "إضافي",
+    "price_upp": " عقلانية ومنطقية ",
+    "price_info": " نص",
+    "price_down": " نص",
+    "Sellcar": "بيع سيارة",
+    "BuyCar": "شراء سيارة"
+  },
+
+  "transmission": {
+    "transmission": "جهاز نقل الحركة",
+    "automatic": "تلقائي",
+    "manual": "يدوي",
+    "tiptronic": "tiptronic"
+  },
+
+  "bodyType": {
+    "bodyType": "نوع الجسم",
+    "sedan": "سيدان",
+    "suv": "سيارات الدفع الرباعي",
+    "coupe": "كوبيه",
+    "hatchback": "هاتشباك",
+    "convertible": "ذات غطاء قابل للطي",
+    "wagon": "عربة",
+    "pickup": "شاحنة صغيرة",
+    "minivan": "ميني فان",
+    "van": "سيارة نقل"
+  },
+
+  "deal": {
+    "deal": "اتفاق",
+    "fantastic_deal": "عرض رائع",
+    "from_agency": "الوكالة"
+  },
+
+  "document": {
+    "document": "وثيقة",
+    "carte_grise": "بطاقة رمادية",
+    "carte_jaune": "بطاقه صفراء",
+    "licence": "رخصة"
+  },
+
+  "energy": {
+    "energy": "نوع الوقود",
+    "ess": "الغازولين",
+    "diesel": "ديزل",
+    "hybride": "هجين"
+  },
+
+  "color": {
+    "color": "اللون",
+    "BodyColor": "لون الجسم",
+    "white": "أبيض",
+    "black": "أسود",
+    "grey": "رمادي",
+    "silver": "فضي",
+    "red": "أحمر",
+    "blue": "أزرق",
+    "brown": "بني",
+    "burngundy": "بورجوندي",
+    "green": "أخضر",
+    "orange": "البرتقالي",
+    "yellow": "أصفر",
+    "purple": "أرجواني"
+  },
+
+  "carInfo": {
+    "sendBtn": "ارسل الان",
+    "engine": "محرك",
+    "EnginePower": "قوة المحرك:",
+    "HorsePower": "حصان",
+    "year": "سنة",
+    "Roof": "السقف الأعلى",
+    "DriveType": "نوع القيادة",
+    "Mileage": "عدد الأميال",
+    "status": "الحالة",
+    "seats": "المقاعد",
+    "NbrSeats": "عدد المقاعد",
+    "MessageAgency": "رسالة للوكالة",
+    "ContactAgency": "اتصل بالوكالة",
+    "VehicleSpecifications": "مواصفات المركبة",
+    "Vehicledetails": "تفاصيل السيارة",
+    "title": "الجيل السابع الجديد من الفئة الثالثة سيدان",
+    "subTitle": "BMW 3 Series 2019",
+    "BrandModel": "الموديل / العلامة التجارية"
+  },
+
+  "listing": {
+    "Searchcar": "ابحث عن سيارة",
+    "VehicleListings": "قائمة المركبات",
+    "Inventory": "المخزون",
+    "ResetFilters": "إعادة تعيين المرشحات",
+    "showresults": "أظهر النتائج",
+    "Showingresults": "عرض النتائج",
+    "to": "إلى",
+    "oftotal": "من "
+  },
+
+  "login": {
+    "Connexion": "تسجيل الدخول",
+    "Inscription": "تسجيل",
+    "motoublié": "نسيت رقمك السري؟"
+  },
+
+  "register": {
+    "account": "هل لديك حساب؟",
+    "inscrire": "تسجيل"
+  },
+  "confirm": {
+    "confirm": "أكد",
+    "text": "تحقق من عنوان بريدك الإلكتروني ثم قم بتنشيط حسابك حتى تتمكن من الوصول إليه",
+    "email": "بريد الالكتروني"
+  },
+  "required": {
+    "pw": "كلمة المرور مطلوبة",
+    "pwConfirm": "مطلوب تأكيد كلمة المرور",
+    "email": "البريد الالكتروني مطلوب",
+    "emailValid": "البريد الإلكتروني ليس عنوان بريد إلكتروني صالحًا",
+    "fn": "الإسم الأول مطلوب",
+    "name": "مطلوب اسم",
+    "phone": "الهاتف مطلوب",
+    "birthday": "تاريخ الميلاد مطلوب",
+    "city": "المدينة مطلوبة",
+    "adress": "العنوان مطلوب",
+    "country": "الدولة مطلوبة",
+    "post": "الرمز البريدي مطلوب"
+  },
+  "select": {
+    "wilaya": "ولاية",
+    "color": "اللون",
+    "body": "جسم",
+    "transmission": "جهاز نقل الحركة",
+    "fuel": "وقود",
+    "document": "وثيقة"
+  },
+  "placeholder": {
+    "pw": "كلمة المرور",
+    "pwConfirm": "تأكيد كلمة المرور",
+    "email": "البريد الالكتروني",
+    "fn": "الإسم الأول",
+    "name": "اسم",
+    "phone": "الهاتف",
+    "birthday": "تاريخ الميلاد",
+    "city": "المدينة",
+    "adress": "العنوان",
+    "country": "الدولة",
+    "post": "الرمز البريدي"
+  }
+}
