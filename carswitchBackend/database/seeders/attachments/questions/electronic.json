@@ -1,0 +1,44 @@
+[
+    {
+        "name_fr": "Moteur",
+        "name_en": "",
+        "name_ar": "",
+        "type": "electronic_diagnostic"
+    },
+    {
+        "name_fr": "Transmission",
+        "name_en": "",
+        "name_ar": "",
+        "type": "electronic_diagnostic"
+    },
+    {
+        "name_fr": "ABS",
+        "name_en": "",
+        "name_ar": "",
+        "type": "electronic_diagnostic"
+    },
+    {
+        "name_fr": "Airbag",
+        "name_en": "",
+        "name_ar": "",
+        "type": "electronic_diagnostic"
+    },
+    {
+        "name_fr": "Climatisation",
+        "name_en": "",
+        "name_ar": "",
+        "type": "electronic_diagnostic"
+    },
+    {
+        "name_fr": "Pas de voyants allumés",
+        "name_en": "",
+        "name_ar": "",
+        "type": "electronic_diagnostic"
+    },
+    {
+        "name_fr": "Pas de defaults majeurs",
+        "name_en": "",
+        "name_ar": "",
+        "type": "electronic_diagnostic"
+    }
+]

@@ -1,0 +1,2270 @@
+openapi: 3.0.0
+
+servers:
+  # Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/HalasProject/SwitchCar/1.0.0
+  - description: SwaggerHub API Auto Mocking
+    url: https://example.io/v1
+
+info:
+  description: SwitchCar API
+  version: "1.0.0"
+  title:  SwitchCar API
+  contact:
+    email: contact@algebratec.com
+
+tags:
+  - name: car
+  - name: garage
+  - name: color
+  - name: inspection
+  - name: question
+  - name: user
+  - name: backOfficeUser
+  - name: rdv
+  - name: buyer
+  - name: feature
+  - name: openingTime
+  - name: front
+
+paths:
+
+###### ADMIN PATHS ######
+
+  # ADMIN LOGIN
+  /admin/login:
+    post:
+      operationId: loginAdmin
+      tags:
+        - admin
+      summary: Admin user
+      requestBody:
+        $ref: "#/components/requestBodies/login"
+        
+      responses:
+        200:
+          description: Loged In
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token_type:
+                    type: string
+                  expires_in:
+                    type: integer
+                  refresh_token:
+                    type: string
+        400:
+          description: Password or email are incorrect
+        422:
+          description: One or many of feilds are incorrect
+
+  # CAR
+  /cars:
+    get:
+      operationId: allCars
+      security:
+        - bearerAuth: []
+      tags:
+        - car
+      summary: Return all cars
+      responses:
+        200:
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Car"
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+
+  /car/{carId}:
+    get:
+      operationId: getCarById
+      security:
+        - bearerAuth: []
+      tags: 
+        - car
+      summary: Get detaille of a specifique car by id
+      parameters:
+        - $ref: "#/components/parameters/carId"
+      responses:
+        200:
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Car"
+        404:
+          description: Car not found
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+    delete:
+      operationId: deleteCar
+      security:
+        - bearerAuth: []
+      tags:
+        - car
+      summary: Delete a specifique Car by id
+      parameters:
+        - $ref: '#/components/parameters/carId'
+      responses:
+        202:
+          description: Car Deleted Successfully
+        404:
+          description: A Car with the specified ID was not found.
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+    put:
+      operationId: editCar
+      security:
+        - bearerAuth: []
+      tags:
+        - car
+      summary: Edit a specifique Car by id
+      parameters:
+        - $ref: '#/components/parameters/carId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Car"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/Car"
+      responses:
+        200:
+          description: Car Edited Succesfly
+          content:
+             application/json:
+              schema:
+                $ref: '#/components/schemas/Car'
+        400:
+          $ref: "#/components/responses/Error"
+        404:
+          $ref: '#/components/responses/Error'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+
+  /car/create:
+    post:
+      security:
+        - bearerAuth: []
+      tags: 
+        - car
+      operationId: createCar
+      summary: Create a new car
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/Car"
+          application/x-www-form-urlencoded:
+            schema:
+              allOf:
+                - $ref : "#/components/schemas/Car"
+
+      responses:
+        201:
+          description: Car created successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/Car"
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+  
+  /car/picture/{pictureId}:
+    delete:
+      security:
+        - bearerAuth: []
+      tags:
+        - car
+      operationId: deletePictureOfCar
+      summary: Delete a specifique picture of car
+      parameters:
+        - $ref: "#/components/parameters/pictureId"
+      responses:
+        200:
+          description: Picture deleted successfully
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+  
+  # GARAGE
+  /garages:
+    get:
+      operationId: allGarages
+      security:
+        - bearerAuth: []
+      tags: 
+        - garage
+      summary: Get list of all garages
+      responses:
+        200:
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Garage"
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+
+  /garage/{garageId}:
+    get:
+      operationId: getGarageById
+      security:
+        - bearerAuth: []
+      tags:
+        - garage
+      summary: Get detaille of a specifique garage by ID
+      parameters:
+        - $ref: "#/components/parameters/garageId"
+      responses:
+        200:
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Garage"
+        404:
+          description: Garage not found
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+    delete:
+      operationId: deleteGarage
+      security:
+        - bearerAuth: []
+      tags:
+        - garage
+      summary: Delete a specifique Garage by id
+      parameters:
+        - $ref: '#/components/parameters/garageId'
+      responses:
+        202:
+          description: Garage Deleted Successfully
+        404:
+          description: A Garage with the specified ID was not found.
+    put:
+      operationId: EditGarage
+      security:
+        - bearerAuth: []
+      tags:
+        - garage
+      summary: Edit a specifique garage by ID
+      parameters:
+        - $ref: "#/components/parameters/garageId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: "#/components/schemas/Garage"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/Garage"
+                
+      responses:
+        201:
+          description: EDITED
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+              
+  /garage/create:
+    post:
+      operationId: createGarage
+      security:
+        - bearerAuth: []
+      tags: 
+        - garage
+      summary: Create a new garage
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/Garage"
+              required:
+                - name
+                  wilaya_id
+                  address
+          application/x-www-form-urlencoded:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/Garage"
+              required:
+                - name
+                  wilaya_id
+                  address
+          
+      responses:
+        201:
+          description: Garage created succcessfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/Garage"
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+  
+  # BACKOFFICE USER
+  /backOfficeUsers:
+    get:
+      operationId: allBackOfficeUsers
+      security:
+        - bearerAuth: []
+      tags:
+        - backOfficeUser
+      summary: Return all staffs
+      responses:
+        200:
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/BackOfficeUser"
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+  
+  /backOfficeUser/{backOfficeUserId}:
+    get:
+      operationId: getBackOfficeUserById
+      security:
+        - bearerAuth: []
+      tags: 
+        - backOfficeUser
+      summary: Get detaille of a specifique staff by ID
+      parameters:
+        - $ref: "#/components/parameters/backOfficeUserId"
+      responses:
+        200:
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BackOfficeUser"
+        404:
+          description: User not found
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+    delete:
+      operationId: deleteBackOfficeUser
+      security:
+        - bearerAuth: []
+      tags:
+        - backOfficeUser
+      summary: Delete a specifique User by id
+      parameters:
+        - $ref: '#/components/parameters/backOfficeUserId'
+      responses:
+        202:
+          description: Staff Deleted Successfully
+        404:
+          description: The Staff with the specified ID was not found.
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+    put:
+      operationId: editBackOfficeUser
+      security:
+        - bearerAuth: []
+      tags:
+        - backOfficeUser
+      summary: Edit a specifique staff by ID
+      parameters:
+        - $ref: "#/components/parameters/backOfficeUserId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: "#/components/schemas/BackOfficeUser"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/BackOfficeUser"
+                
+      responses:
+        201:
+          description: EDITED
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+              
+  /backOfficeUser/create:
+    post:
+      operationId: createBackOfficeUser
+      security:
+        - bearerAuth: []
+      tags: 
+        - backOfficeUser
+      summary: Create a new user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: "#/components/schemas/User"
+              required:
+                - role_id
+                  first_name
+                  last_name
+                  email
+                  password
+                  birthday
+                  city
+                  address
+                  phone
+          application/x-www-form-urlencoded:
+            schema:
+              oneOf:
+                - $ref: "#/components/schemas/User"
+              required:
+                - role_id
+                  first_name
+                  last_name
+                  email
+                  password
+                  birthday
+                  city
+                  address
+                  phone
+          
+                  
+      responses:
+        201:
+          description: Staff created successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/BackOfficeUser"
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+          
+  # USER
+  /users:
+    get:
+      operationId: allUsers
+      security:
+        - bearerAuth: []
+      tags:
+        - user
+      summary: Return all users
+      responses:
+        200:
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/User"
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+  
+  /user/{userId}:
+    get:
+      operationId: getUserById
+      security:
+        - bearerAuth: []
+      tags:
+        - user
+      summary: Get detaille of a specifique user by ID
+      parameters:
+        - $ref: "#/components/parameters/userId"
+      responses:
+        200:
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        404:
+          description: User not found
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+    delete:
+      operationId: deleteUser
+      security:
+        - bearerAuth: []
+      tags:
+        - user
+      summary: Delete a specifique User by id
+      parameters:
+        - $ref: '#/components/parameters/userId'
+      responses:
+        202:
+          description: User Deleted Successfully
+        404:
+          description: The User with the specified ID was not found.
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+    put:
+      operationId: editUser
+      security:
+        - bearerAuth: []
+      tags:
+        - user
+      summary: Edit a specifique user by ID
+      parameters:
+        - $ref: "#/components/parameters/userId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: "#/components/schemas/User"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/User"
+                
+      responses:
+        201:
+          description: EDITED
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+              
+  /user/create:
+    post:
+      operationId: createUser
+      security:
+        - bearerAuth: []
+      tags: 
+        - user
+      summary: Create a new user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/User"
+              required:
+                - first_name
+                  last_name
+                  email
+                  password
+                  birthday
+                  city
+                  phone
+          application/x-www-form-urlencoded:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/User"
+              required:
+                - first_name
+                  last_name
+                  email
+                  password
+                  birthday
+                  city
+                  phone
+                  
+      responses:
+        201:
+          description: User created successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/User"
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+
+  # RDV 
+  /rdvs:
+    get:
+      operationId: allRdvs
+      security:
+        - bearerAuth: []
+      tags:
+        - rdv
+      summary: Get list of all rdvs
+      responses:
+        200:
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref : "#/components/schemas/Rdv"
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+                
+  /rdv/{rdvId}:
+    get:
+      operationId: getRdvById
+      security:
+        - bearerAuth: []
+      tags: 
+        - rdv
+      summary: Get detaille of a specifique rdv by ID
+      parameters:
+        - $ref: "#/components/parameters/rdvId"
+      responses:
+        200:
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Rdv"
+        404:
+          description: Rdv not found
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+    delete:
+      operationId: deleteRdv
+      security:
+        - bearerAuth: []
+      tags:
+        - rdv
+      summary: Delete a specifique Rdv by id
+      parameters:
+        - $ref: '#/components/parameters/rdvId'
+      responses:
+        202:
+          description: Rdv Deleted Successfully
+        404:
+          description: The Rdv with the specified ID was not found.
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+    put:
+      operationId: editRdv
+      security:
+        - bearerAuth: []
+      tags:
+        - rdv
+      summary: Edit a specifique Rdv by ID
+      parameters:
+        - $ref: "#/components/parameters/rdvId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: "#/components/schemas/Rdv"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/Rdv"
+                
+      responses:
+        201:
+          description: EDITED
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+     
+  /rdv/create:
+    post:
+      operationId: createRdv
+      security:
+        - bearerAuth: []
+      tags: 
+        - rdv
+      summary: Create a new rdv
+      requestBody:
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: "#/components/schemas/Rdv"
+              required:
+                - car_id
+                  rdv_date
+                  rdv_time
+                  rdv_type
+                  expected_payment
+                  payment_is_collected
+          application/x-www-form-urlencoded:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/Rdv"
+              required:
+                - car_id
+                  rdv_date
+                  rdv_time
+                  rdv_type
+                  expected_payment
+                  payment_is_collected
+      responses:
+        201:
+          description: Rdv created successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/Rdv"
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+
+  # INSPECTION 
+  /inspections:
+    get:
+      operationId: allInspection
+      security:
+        - bearerAuth: []
+      tags:
+        - inspection
+      summary: Get list of all inspections
+      responses:
+        200:
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref : "#/components/schemas/Inspection"
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+                
+  /inspection/{inspectionId}:
+    get:
+      operationId: getInspectionById
+      security:
+        - bearerAuth: []
+      tags: 
+        - inspection
+      summary: Get detaille of a specifique inspection by ID
+      parameters:
+        - $ref: "#/components/parameters/inspectionId"
+      responses:
+        200:
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Inspection"
+        404:
+          description: inspection not found
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+    delete:
+      operationId: deleteInspection
+      security:
+        - bearerAuth: []
+      tags:
+        - inspection
+      summary: Delete a specifique inspection by id
+      parameters:
+        - $ref: '#/components/parameters/inspectionId'
+      responses:
+        202:
+          description: Rdv Deleted Successfully
+        404:
+          description: The inspection with the specified ID was not found.
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+    put:
+      operationId: editInspection
+      security:
+        - bearerAuth: []
+      tags:
+        - inspection
+      summary: Edit a specifique inspection by ID
+      parameters:
+        - $ref: "#/components/parameters/inspectionId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: "#/components/schemas/Inspection"
+                
+      responses:
+        201:
+          description: EDITED
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+     
+  /inspection/create:
+    post:
+      operationId: createInspection
+      security:
+        - bearerAuth: []
+      tags: 
+        - inspection
+      summary: Create a new inspection
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/Inspection"
+              required:
+                - car_id
+                  rdv_id
+                  garage_id
+                  type
+          application/x-www-form-urlencoded:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/Inspection"
+              required:
+                - car_id
+                  rdv_id
+                  garage_id
+                  type
+      responses:
+        201:
+          description: Inspection created successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/Inspection"
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+          
+  # BUYER
+  /buyers:
+    get:
+      operationId: allBuyers
+      security:
+        - bearerAuth: []
+      tags:
+        - buyer
+      summary: Get list of all buyers
+      responses:
+        200:
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref : "#/components/schemas/Buyer"
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+                
+  /buyer/{buyerId}:
+    get:
+      operationId: getBuyerById
+      security:
+        - bearerAuth: []
+      tags: 
+        - buyer
+      summary: Get detaille of a specifique buyer by ID
+      parameters:
+        - $ref: "#/components/parameters/buyerId"
+      responses:
+        200:
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Buyer"
+        404:
+          description: inspection not found
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+    delete:
+      operationId: deleteBuyer
+      security:
+        - bearerAuth: []
+      tags:
+        - buyer
+      summary: Delete a specifique buyer by id
+      parameters:
+        - $ref: '#/components/parameters/buyerId'
+      responses:
+        202:
+          description: Buyer Deleted Successfully
+        404:
+          description: The buyer with the specified ID was not found.
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+    put:
+      operationId: editBuyer
+      security:
+        - bearerAuth: []
+      tags:
+        - buyer
+      summary: Edit a specifique buyer by ID
+      parameters:
+        - $ref: "#/components/parameters/buyerId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: "#/components/schemas/Buyer"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/Buyer"
+                
+      responses:
+        201:
+          description: EDITED
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+     
+  /buyer/create:
+    post:
+      operationId: createBuyer
+      security:
+        - bearerAuth: []
+      tags: 
+        - buyer
+      summary: Create a new buyer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/Buyer"
+              required:
+                - car_id
+                  first_name
+                  last_name
+                  phone
+                  status
+          application/x-www-form-urlencoded:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/Buyer"
+              required:
+                - car_id
+                  first_name
+                  last_name
+                  phone
+                  status
+      responses:
+        201:
+          description: Buyer Created successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/Buyer"
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+
+  # COLOR
+  /colors:
+    get:
+      operationId: allColors
+      security:
+        - bearerAuth: []
+      tags:
+        - color
+      summary: Get list of all colors
+      responses:
+        200:
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref : "#/components/schemas/Color"
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+                
+  /color/{colorId}:
+    get:
+      operationId: getColorById
+      security:
+        - bearerAuth: []
+      tags: 
+        - color
+      summary: Get detaille of a specifique color by ID
+      parameters:
+        - $ref: "#/components/parameters/colorId"
+      responses:
+        200:
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Color"
+        404:
+          description: color not found
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+    delete:
+      operationId: deleteColor
+      security:
+        - bearerAuth: []
+      tags:
+        - color
+      summary: Delete a specifique color by id
+      parameters:
+        - $ref: '#/components/parameters/colorId'
+      responses:
+        202:
+          description: Color Deleted Successfully
+        404:
+          description: The color with the specified ID was not found.
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+    put:
+      operationId: editColor
+      security:
+        - bearerAuth: []
+      tags:
+        - color
+      summary: Edit a specifique color by ID
+      parameters:
+        - $ref: "#/components/parameters/colorId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: "#/components/schemas/Color"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/Color"
+                
+      responses:
+        201:
+          description: EDITED
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+     
+  /color/create:
+    post:
+      operationId: createColor
+      security:
+        - bearerAuth: []
+      tags: 
+        - color
+      summary: Create a new color
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/Color"
+              required:
+                - name
+                  hex
+          application/x-www-form-urlencoded:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/Color"
+              required:
+                - name
+                  hex
+      responses:
+        201:
+          description: Buyer Created successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/Buyer"
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+
+  # Question
+  /questions:
+    get:
+      operationId: allQuestions
+      security:
+        - bearerAuth: []
+      tags:
+        - question
+      summary: Get list of all questions
+      responses:
+        200:
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref : "#/components/schemas/Question"
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+                
+  /question/{questionId}:
+    get:
+      operationId: getQuestionById
+      security:
+        - bearerAuth: []
+      tags: 
+        - question
+      summary: Get detaille of a specifique question by ID
+      parameters:
+        - $ref: "#/components/parameters/questionId"
+      responses:
+        200:
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Question"
+        404:
+          description: inspection not found
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+    delete:
+      operationId: deleteQuestion
+      security:
+        - bearerAuth: []
+      tags:
+        - question
+      summary: Delete a specifique question by id
+      parameters:
+        - $ref: '#/components/parameters/questionId'
+      responses:
+        202:
+          description: Question Deleted Successfully
+        404:
+          description: The question with the specified ID was not found.
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+    put:
+      operationId: EditQuestion
+      security:
+        - bearerAuth: []
+      tags:
+        - question
+      summary: Edit a specifique question by ID
+      parameters:
+        - $ref: "#/components/parameters/questionId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: "#/components/schemas/Question"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/Question"
+                
+                
+      responses:
+        201:
+          description: EDITED
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+     
+  /question/create:
+    post:
+      operationId: createQuestion
+      security:
+        - bearerAuth: []
+      tags: 
+        - question
+      summary: Create a new question
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/Question"
+              required:
+                - car_id
+                  question_en
+                  type
+          application/x-www-form-urlencoded:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/Question"
+                required:
+                  - car_id
+                    question_en
+                    type
+      responses:
+        201:
+          description: Question Created successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/Question"
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+
+  # Feature
+  /features:
+    get:
+      operationId: allFeatures
+      security:
+        - bearerAuth: []
+      tags:
+        - feature
+      summary: Get list of all features
+      responses:
+        200:
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref : "#/components/schemas/Feature"
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+                
+  /feature/{featureId}:
+    get:
+      operationId: getFeatureById
+      security:
+        - bearerAuth: []
+      tags: 
+        - feature
+      summary: Get detaille of a specifique feature by ID
+      parameters:
+        - $ref: "#/components/parameters/featureId"
+      responses:
+        200:
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Question"
+            application/x-www-form-urlencoded:
+              schema:
+                $ref: "#/components/schemas/Question"
+        404:
+          description: inspection not found
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+    delete:
+      operationId: deleteFeature
+      security:
+        - bearerAuth: []
+      tags:
+        - feature
+      summary: Delete a specifique feature by id
+      parameters:
+        - $ref: '#/components/parameters/featureId'
+      responses:
+        202:
+          description: Feature Deleted Successfully
+        404:
+          description: The feature with the specified ID was not found.
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+    put:
+      operationId: editFeature
+      security:
+        - bearerAuth: []
+      tags:
+        - feature
+      summary: Edit a specifique feature by ID
+      parameters:
+        - $ref: "#/components/parameters/featureId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: "#/components/schemas/Feature"
+                
+      responses:
+        201:
+          description: EDITED
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+     
+  /feature/create:
+    post:
+      operationId: createFeature
+      security:
+        - bearerAuth: []
+      tags: 
+        - feature
+      summary: Create a new feature
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/Feature"
+              required:
+                - name_en
+                  icon
+          application/x-www-form-urlencoded:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/Feature"
+              required:
+                - name_en
+                  icon
+      responses:
+        201:
+          description: Feature created successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/Feature"
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+
+
+  # Opening Time
+  /opening_times:
+    get:
+      operationId: allOpeningTimes
+      security:
+        - bearerAuth: []
+      tags:
+        - openingTime
+      summary: Get list of all opening time
+      responses:
+        200:
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref : "#/components/schemas/OpeningTime"
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+                
+  /opening_time/{openingTimeId}:
+    get:
+      operationId: getOpeningTimeById
+      security:
+        - bearerAuth: []
+      tags: 
+        - openingTime
+      summary: Get detaille of a specifique Timing by ID
+      parameters:
+        - $ref: "#/components/parameters/openingTimeId"
+      responses:
+        200:
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OpeningTime"
+        404:
+          description: Timing not found
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+    delete:
+      operationId: deleteOpeningTime
+      security:
+        - bearerAuth: []
+      tags:
+        - openingTime
+      summary: Delete a specifique Timing by id
+      parameters:
+        - $ref: '#/components/parameters/openingTimeId'
+      responses:
+        202:
+          description: Timing Deleted Successfully
+        404:
+          description: The Timing with the specified ID was not found.
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+    put:
+      operationId: editOpeningTime
+      security:
+        - bearerAuth: []
+      tags:
+        - openingTime
+      summary: Edit a specifique Timing by ID
+      parameters:
+        - $ref: "#/components/parameters/openingTimeId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: "#/components/schemas/OpeningTime"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/OpeningTime"
+                
+      responses:
+        201:
+          description: EDITED
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+     
+  /opening_time/create:
+    post:
+      operationId: createOpeningTime
+      security:
+        - bearerAuth: []
+      tags: 
+        - openingTime
+      summary: Create a new Opening Time
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/OpeningTime"
+              required:
+                - morning_opening_time
+                  morning_close_time
+                  afternoon_opening_time
+                  afternoon_close_time
+          application/x-www-form-urlencoded:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/OpeningTime"
+              required:
+                - morning_opening_time
+                  morning_close_time
+                  afternoon_opening_time
+                  afternoon_close_time
+      responses:
+        201:
+          description: Timing created successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/OpeningTime"
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+
+        
+###### FRONTEND PATHS ######
+
+  /register:
+    post:
+      operationId: register
+      tags:
+        - front
+      summary: Create new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/User'
+          application/x-www-form-urlencoded:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/User'
+          
+      responses:
+        201:
+          description: CREATED
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    default: 'User created Successfully'
+        422:
+          description: One or many of feilds are incorrect
+
+  /login:
+    post:
+      operationId: login
+      tags:
+        - front
+      summary: Login user
+      requestBody:
+        $ref: "#/components/requestBodies/login"
+              
+      responses:
+        200:
+          description: Loged In
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token_type:
+                    type: string
+                  expires_in:
+                    type: integer
+                  refresh_token:
+                    type: string
+        400:
+          description: Password or email are incorrect
+        422:
+          description: One or many of feilds are incorrect
+
+  /front/cars:
+    get:
+      operationId: allCarsFront
+      summary: return all cars
+      tags:
+        - front
+      parameters:
+        - name: search
+          in: query
+          description: Search lists of cars by name
+          required: false
+          schema:
+            type: string
+        - name: price_min
+          in: query
+          description: Get lists of cars by (min) price
+          required: false
+          schema:
+            type: integer
+        - name: price_max
+          in: query
+          description: Get lists of cars by (max) price
+          required: false
+          schema:
+            type: integer
+        - name: color
+          in: query
+          description: Get lists of cars by color
+          required: false
+          schema:
+            type: integer
+        - name: marque
+          in: query
+          description: Get lists of cars by marque
+          required: false
+          schema:
+            type: string
+        - name: model
+          in: query
+          description: Get lists of cars by model
+          required: false
+          schema:
+            type: string
+        - name: year_start
+          in: query
+          description: Get lists of cars by start year
+          required: false
+          schema:
+            type: integer
+            minimum: 1900
+        - name: year_end
+          in: query
+          description: Get lists of cars by end year
+          required: false
+          schema:
+            type: integer
+            maximum: 9999
+        - name: region
+          in: query
+          description: Get lists of cars by region ID
+          required: false
+          schema:
+            type: integer
+        - name: wilaya
+          in: query
+          description: Get lists of cars by wilaya ID
+          required: false
+          schema:
+            type: integer
+        - name: mileage_start
+          in: query
+          description: Get lists of cars by mileage start number
+          required: false
+          schema:
+            type: integer
+        - name: mileage_end
+          in: query
+          description: Get lists of cars by mileage end number
+          required: false
+          schema:
+            type: integer
+        - name: body
+          in: query
+          description: Get lists of cars by bodys type
+          required: false
+          schema:
+            type: string
+        - name: document_type
+          in: query
+          description: Get lists of cars by documents type
+          required: false
+          schema:
+            type: string
+        - name: transmition
+          in: query
+          description: Get lists of cars by transmistion type
+          required: false
+          schema:
+            type: string
+            enum: [automatic, manual, tiptronic]
+        - name: energy
+          in: query
+          description: Get lists of cars by enrgy type
+          required: false
+          schema:
+            type: string
+            enum: [ess, diesel, hybride]
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Car'
+
+  /wilayas:
+    get:
+      operationId: allWilayas
+      summary: Get lists of all wilayas
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Wilaya'
+
+  /front/car/like:
+    post:
+      operationId: userLikeCar
+      security:
+        - bearerAuth: []
+      tags:
+        - front
+      summary: User like or dislike a specifique car by ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                car_id:
+                  type: integer
+              required:
+                - car_id
+      responses:
+        201:
+          description: LIKED OR DISLIKED
+        404:
+          description: Car not found
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+        
+
+              
+      parameters:
+      - $ref: '#/components/parameters/carId'
+  
+  /front/car/{carId}:
+    get:
+      operationId: getCarByIdFront
+      tags: 
+        - front
+      summary: Get detaille of a specifique car by id
+      parameters:
+        - $ref: "#/components/parameters/carId"
+      responses:
+        200:
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Car"
+        404:
+          description: Car not found
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+    delete:
+      operationId: deleteCarFront
+      security:
+        - bearerAuth: []
+      tags:
+        - front
+      summary: Delete a specifique Car by id
+      parameters:
+        - $ref: '#/components/parameters/carId'
+      responses:
+        202:
+          description: Car Deleted Successfully
+        404:
+          description: A Car with the specified ID was not found.
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+    put:
+      operationId: editCarFront
+      security:
+        - bearerAuth: []
+      tags:
+        - front
+      summary: Edit a specifique Car by id
+      parameters:
+        - $ref: '#/components/parameters/carId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Car"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/Car"
+      responses:
+        200:
+          description: Car Edited Succesfly
+          content:
+             application/json:
+              schema:
+                $ref: '#/components/schemas/Car'
+        400:
+          $ref: "#/components/responses/Error"
+        404:
+          $ref: '#/components/responses/Error'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+      
+  /front/car/create:
+    post:
+      operationId: createCarFront
+      security:
+        - bearerAuth: []
+      tags: 
+        - front
+      summary: Create a new car
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Car"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/Car"
+      responses:
+        201:
+          description: Car created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Car"
+            application/x-www-form-urlencoded:
+              schema:
+                $ref: "#/components/schemas/Car"
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+
+components:
+
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      
+
+  schemas:
+    Car:
+        type: object
+        properties:
+          id:
+            type: integer
+            format: uuid
+            readOnly: true
+          color_id:
+            type: integer
+            writeOnly: true
+          wilaya_id:
+            type: integer
+            writeOnly: true
+          model_id:
+            type: integer
+            writeOnly: true
+          body:
+            type: string
+            enum: [sedan, suv, coupe, hatchback, convertible, wagon, pickup, minivan, van]
+          status:
+            type: string
+            enum: [new, remind, duplicate, bad_condition, missing_documents, not_interested, refusal_to_pay_inspection, refusal_to_pay_commission, unreachable, overvalued, appointment_taken, published, already_sold, concluded, sold_by_v]
+          tyre:
+            type: string
+            enum: ["12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22"]
+          document:
+            type: string
+            enum: [carte_grise, carte_jaune, licence]
+          roof:
+            type: string
+            enum: [sunroof, sun_and_moonroof, moonroof, panoramic, convertible, normal_roof]
+          specs:
+            type: string
+            enum: [GCC, european, japanese, american, canadian, non_GCC]
+          drive_type:
+            type: string
+            enum: [AWD, "2WD", "4WD"]
+          deal:
+            type: string
+            enum: [fantastic_deal, from_agency]
+          seat:
+            type: string
+            enum: [leather_seats, fabric_seats]
+          transmition:
+            type: string
+            enum: [automatic, manual, tiptronic]
+          energy:
+            type: string
+            enum: [ess, diesel, hybride]
+          seat_number:
+            type: integer
+          number_of_owner:
+            type: integer
+          cylindre_number:
+            type: integer
+          year:
+            type: integer
+            minimum: 1980
+            maximum: 2022
+          horse_power:
+            type: integer
+          registration_document_path:
+            type: string
+            format: binary
+            nullable: true
+          control_document_path:
+            type: string
+            format: binary
+            nullable: true
+          license_plat:
+            type: string
+          vin:
+            type: string
+          used:
+            type: boolean
+          torque:
+            type: string
+          phone:
+            type: string
+          featured:
+            type: boolean
+            nullable: false
+          owner_description:
+            type: string
+            nullable: true
+          car_overview:
+            type: string
+            nullable: true
+          information:
+            type: string
+            nullable: true
+          pictures:
+            type: array
+            items:
+              type: string
+              format: binary
+          created_at:
+            type: string
+            format: date-time
+            readOnly: true
+    Color:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: uuid
+          readOnly: true
+        name:
+          type: string
+        hex:
+          type: string
+        created_at:
+            type: string
+            format: date-time
+            readOnly: true
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: uuid
+          readOnly: true
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          writeOnly: true
+        phone:
+          type: string
+        birthday:
+          type: string
+          format: date
+        city:
+          type: string
+        address:
+          type: string
+        created_at:
+            type: string
+            format: date-time
+            readOnly: true
+    Garage:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: uuid
+          readOnly: true
+        name:
+          type: string
+        wilaya_id:
+          type: integer
+        address:
+          type: string
+          nullable: true
+        sunday_time:
+          type: integer
+          nullable: true
+        monday_time:
+          type: integer
+          nullable: true
+        tuesday_time:
+          type: integer
+          nullable: true
+        wednesday_time:
+          type: integer
+          nullable: true
+        thursday_time:
+          type: integer
+          nullable: true
+        friday_time:
+          type: integer
+          nullable: true
+        saturday_time:
+          type: integer
+          nullable: true
+        created_at:
+            type: string
+            format: date-time
+            readOnly: true
+    BackOfficeUser:
+      allOf:
+        - $ref: '#/components/schemas/User'
+      type: object
+      properties:
+        role_id:
+          type: integer
+        garage_id:
+          type: integer
+          nullable: true
+        picture:
+          type: string
+          format: binary
+          nullable: true
+    Question:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: uuid
+          readOnly: true
+        question_fr:
+          type: string
+          nullable: true
+        question_en:
+          type: string
+          nullable: true
+        question_ar:
+          type: string
+          nullable: true
+        type:
+          type: string
+          enum: [exterior, interior, engine, driving, electronic_diagnostic, tyre_and_brake, scratches, document, underbody]
+        created_at:
+            type: string
+            format: date-time
+            readOnly: true
+    Feature:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: uuid
+          readOnly: true
+        name_fr:
+          type: string
+          nullable: true
+        name_en:
+          type: string
+          nullable: true
+        name_ar:
+          type: string
+          nullable: true
+        icon:
+          type: string
+          nullable: true
+        created_at:
+            type: string
+            format: date-time
+            readOnly: true
+    Rdv:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: uuid
+          readOnly: true
+        car_id:
+          type: integer
+        admin_id:
+          type: integer
+        garage_id:
+          type: integer
+          nullable: true
+        address:
+          type: string
+          nullable: true
+        rdv_date:
+          type: string
+          format: date
+        rdv_time:
+          type: string
+        rdv_type:
+          type: string
+          enum: [inspection, sale, visit, unavaibility]
+        expected_payment:
+          type: number
+          format: float
+          default: 0
+        payment_is_collected:
+          type: boolean
+        note:
+          type: string
+          nullable: true
+        created_at:
+            type: string
+            format: date-time
+            readOnly: true
+    Inspection:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: uuid
+          readOnly: true
+        car_id:
+          type: integer
+        rdv_id:
+          type: integer
+        admin_id:
+          type: integer
+        garage_id:
+          type: integer
+        type:
+          type: string
+          enum: [first_level,second_level,both]
+        created_at:
+            type: string
+            format: date-time
+            readOnly: true
+    Buyer:
+      type: object
+      properties:
+        car_id:
+          type: integer
+          format: uuid
+        first_name:
+          type: string
+        last_name:
+          type: string
+        phone:
+          type: string
+        status:
+          type: string
+          enum:  [new, in_progress, offer_rejected, not_concluded, not_interested, reserved, pipeline, concluded, sold_by_V]
+        created_at:
+            type: string
+            format: date-time
+            readOnly: true
+    Wilaya:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: uuid
+          readOnly: true
+        region_id:
+          type: integer
+        name_fr:
+          type: string
+        name_ar:
+          type: string
+        code_postal:
+          type: integer
+          minimum: 01
+          maximum: 48
+        created_at:
+            type: string
+            format: date-time
+            readOnly: true
+    OpeningTime:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: uuid
+          readOnly: true
+        name:
+          type: string
+        morning_opening_time:
+          type: integer
+        morning_close_time:
+          type: integer
+        afternoon_opening_time:
+          type: integer
+        afternoon_close_time:
+          type: integer
+        created_at:
+            type: string
+            format: date-time
+            readOnly: true
+    Region:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: uuid
+          readOnly: true
+        name:
+          type: string
+        created_at:
+            type: string
+            format: date-time
+            readOnly: true
+  requestBodies:
+    login:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+                format: email
+              password:
+                type: string
+            required:
+              - email
+              - password
+        application/x-www-form-urlencoded:
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+                format: email
+              password:
+                type: string
+            required:
+              - email
+              - password
+          
+  responses:
+    UnauthorizedError:
+      description: Access token is missing or invalid
+    Error:
+      description: Invalid request
+      content:
+        application/json:
+          schema:
+            type: object 
+            properties:
+              message:
+                type: string
+
+  parameters:
+    carId:
+      name: carId
+      in: path
+      required: true
+      description: The ID of a specifique car
+      schema:
+        type: integer
+      
+    garageId:
+      name: garageId
+      in: path
+      required: true
+      description: The ID of a specifique garage
+      schema:
+        type: integer
+        
+    userId:
+      name: userId
+      in: path
+      required: true
+      description: The ID of a specifique user
+      schema:
+        type: integer
+
+    rdvId:
+      name: rdvId
+      in: path
+      required: true
+      description: The ID of a specifique rdv
+      schema:
+        type: integer
+      
+    inspectionId:
+      name: inspectionId
+      in: path
+      required: true
+      description: The ID of a specifique inspection
+      schema:
+        type: integer
+        
+    buyerId:
+      name: buyerId
+      in: path
+      required: true
+      description: The ID of a specifique buyer
+      schema:
+        type: integer
+                
+    backOfficeUserId:
+      name: backOfficeUserId
+      in: path
+      required: true
+      description: The ID of a specifique staff
+      schema:
+        type: integer
+        
+    questionId:
+      name: questionId
+      in: path
+      required: true
+      description: The ID of a specifique question
+      schema:
+        type: integer
+
+    featureId:
+      name: featureId
+      in: path
+      required: true
+      description: The ID of a specifique feature
+      schema:
+        type: integer
+        
+    openingTimeId:
+      name: openingTimeId
+      in: path
+      required: true
+      description: The ID of a specifique Timing
+      schema:
+        type: integer
+
+    pictureId:
+      name: pictureId
+      in: path
+      required: true
+      description: The ID of a specifique picture
+      schema:
+        type: integer
+  
+    colorId:
+      name: colorId
+      in: path
+      required: true
+      description: The ID of a specifique color
+      schema:
+        type: integer

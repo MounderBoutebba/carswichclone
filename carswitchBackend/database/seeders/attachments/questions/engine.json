@@ -1,0 +1,62 @@
+[
+    {
+        "name_fr": "Démarre au quart de tour",
+        "name_en": "",
+        "name_ar": "",
+        "type": "engine"
+    },
+    {
+        "name_fr": "Pas de fumée noire ou blanche",
+        "name_en": "",
+        "name_ar": "",
+        "type": "engine"
+    },
+    {
+        "name_fr": "Pas de bruits anormaux",
+        "name_en": "",
+        "name_ar": "",
+        "type": "engine"
+    },
+    {
+        "name_fr": "Pas d’odeurs anormales",
+        "name_en": "",
+        "name_ar": "",
+        "type": "engine"
+    },
+    {
+        "name_fr": "Pas de fuites d’huiles apparentes",
+        "name_en": "",
+        "name_ar": "",
+        "type": "engine"
+    },
+    {
+        "name_fr": "Ventilateur et radiateur",
+        "name_en": "",
+        "name_ar": "",
+        "type": "engine"
+    },
+    {
+        "name_fr": "Liquides et durites",
+        "name_en": "",
+        "name_ar": "",
+        "type": "engine"
+    },
+    {
+        "name_fr": "Alternateur et courroies",
+        "name_en": "",
+        "name_ar": "",
+        "type": "engine"
+    },
+    {
+        "name_fr": "Batterie",
+        "name_en": "",
+        "name_ar": "",
+        "type": "engine"
+    },
+    {
+        "name_fr": "Tuyau d’échappement",
+        "name_en": "",
+        "name_ar": "",
+        "type": "engine"
+    }
+]

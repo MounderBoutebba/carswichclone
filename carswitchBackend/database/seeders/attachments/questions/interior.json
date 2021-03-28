@@ -1,0 +1,56 @@
+[
+    {
+        "name_fr": "Fermeture centralisée",
+        "name_en": "",
+        "name_ar": "",
+        "type": "interior"
+    },
+    {
+        "name_fr": "Sièges",
+        "name_en": "",
+        "name_ar": "",
+        "type": "interior"
+    },
+    {
+        "name_fr": "Plancher",
+        "name_en": "",
+        "name_ar": "",
+        "type": "interior"
+    },
+    {
+        "name_fr": "Revêtement du toit",
+        "name_en": "",
+        "name_ar": "",
+        "type": "interior"
+    },
+    {
+        "name_fr": "Plafonnier",
+        "name_en": "",
+        "name_ar": "",
+        "type": "interior"
+    },
+    {
+        "name_fr": "Vitres électriques",
+        "name_en": "",
+        "name_ar": "",
+        "type": "interior"
+    },
+    {
+        "name_fr": "Ventilation & climatisation",
+        "name_en": "",
+        "name_ar": "",
+        "type": "interior"
+    },
+    {
+        "name_fr": "Toit ouvrant (si applicable)",
+        "name_en": "",
+        "name_ar": "",
+        "type": "interior"
+    },
+    {
+        "name_fr": "Pas d’odeurs particulières",
+        "name_en": "",
+        "name_ar": "",
+        "type": "interior"
+    }
+]

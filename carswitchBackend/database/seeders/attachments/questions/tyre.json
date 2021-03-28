@@ -1,0 +1,74 @@
+[
+    {
+        "name_fr": "Pneus de même model",
+        "name_en": "",
+        "name_ar": "",
+        "type": "tyre_and_brake"
+    },
+    {
+        "name_fr": "Pas de rayures sur les jantes",
+        "name_en": "",
+        "name_ar": "",
+        "type": "tyre_and_brake"
+    },
+    {
+        "name_fr": "Plaquettes avant (60%)",
+        "name_en": "",
+        "name_ar": "",
+        "type": "tyre_and_brake"
+    },
+    {
+        "name_fr": "Disques avant",
+        "name_en": "",
+        "name_ar": "",
+        "type": "tyre_and_brake"
+    },
+    {
+        "name_fr": "Plaquettes arrière (20%)",
+        "name_en": "",
+        "name_ar": "",
+        "type": "tyre_and_brake"
+    },
+    {
+        "name_fr": "Disques arrière",
+        "name_en": "",
+        "name_ar": "",
+        "type": "tyre_and_brake"
+    },
+    {
+        "name_fr": "Criques et accessoires disponibles ",
+        "name_en": "",
+        "name_ar": "",
+        "type": "tyre_and_brake"
+    },
+    {
+        "name_fr": "Roue de secours disponible",
+        "name_en": "",
+        "name_ar": "",
+        "type": "tyre_and_brake"
+    },
+    {
+        "name_fr": "Pneu avant droit       2016 (40%)",
+        "name_en": "",
+        "name_ar": "",
+        "type": "tyre_and_brake"
+    },
+    {
+        "name_fr": "Pneu avant gauche   2016 (40%)",
+        "name_en": "",
+        "name_ar": "",
+        "type": "tyre_and_brake"
+    },
+    {
+        "name_fr": "Pneu arrière droit     2020 (80%)",
+        "name_en": "",
+        "name_ar": "",
+        "type": "tyre_and_brake"
+    },
+    {
+        "name_fr": "Pneu arrière gauche 2020 (80%)",
+        "name_en": "",
+        "name_ar": "",
+        "type": "tyre_and_brake"
+    }
+]

@@ -1,0 +1,110 @@
+[
+    {
+        "name_fr": "Capot",
+        "name_en": "",
+        "name_ar": "",
+        "type": "exterior"
+    },
+    {
+        "name_fr": "Pare choc avant",
+        "name_en": "",
+        "name_ar": "",
+        "type": "exterior"
+    },
+    {
+        "name_fr": "Aile avant gauche",
+        "name_en": "",
+        "name_ar": "",
+        "type": "exterior"
+    },
+    {
+        "name_fr": "Porte avant gauche",
+        "name_en": "",
+        "name_ar": "",
+        "type": "exterior"
+    },
+    {
+        "name_fr": "Porte arrière gauche",
+        "name_en": "",
+        "name_ar": "",
+        "type": "exterior"
+    },
+    {
+        "name_fr": "Aile arrière gauche ",
+        "name_en": "",
+        "name_ar": "",
+        "type": "exterior"
+    },
+    {
+        "name_fr": "Coffre  (la male) ",
+        "name_en": "",
+        "name_ar": "",
+        "type": "exterior"
+    },
+    {
+        "name_fr": "Pare choc arrière ",
+        "name_en": "",
+        "name_ar": "",
+        "type": "exterior"
+    },
+    {
+        "name_fr": "Aile arrière droite ",
+        "name_en": "",
+        "name_ar": "",
+        "type": "exterior"
+    },
+    {
+        "name_fr": "Porte arrière droite",
+        "name_en": "",
+        "name_ar": "",
+        "type": "exterior"
+    },
+    {
+        "name_fr": "Porte avant droite",
+        "name_en": "",
+        "name_ar": "",
+        "type": "exterior"
+    },
+    {
+        "name_fr": "Aile avant droite",
+        "name_en": "",
+        "name_ar": "",
+        "type": "exterior"
+    },
+    {
+        "name_fr": "Le toit",
+        "name_en": "",
+        "name_ar": "",
+        "type": "exterior"
+    },
+    {
+        "name_fr": "Sous bassement ",
+        "name_en": "",
+        "name_ar": "",
+        "type": "exterior"
+    },
+    {
+        "name_fr": "Pare-brise ",
+        "name_en": "",
+        "name_ar": "",
+        "type": "exterior"
+    },
+    {
+        "name_fr": "Lunette arrière",
+        "name_en": "",
+        "name_ar": "",
+        "type": "exterior"
+    },
+    {
+        "name_fr": "Rétroviseurs",
+        "name_en": "",
+        "name_ar": "",
+        "type": "exterior"
+    },
+    {
+        "name_fr": "Toutes les parties alignées.",
+        "name_en": "",
+        "name_ar": "",
+        "type": "exterior"
+    }
+]
