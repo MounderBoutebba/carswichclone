@@ -1,0 +1,299 @@
+<div
+    id="products"
+    class="page-layout carded fullwidth inner-scroll"
+    style="height: 100vh; overflow-y: scroll !important"
+>
+    <!-- TOP BACKGROUND -->
+    <div
+        class="top-bg accent"
+        style="
+            color: white;
+            background-image: url(/assets/images/demo-content/morain-lake.jpg);
+            background-size: cover;
+        "
+    ></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div
+            class="header"
+            style="color: white"
+            fxLayout="column"
+            fxLayoutAlign="center center"
+            fxLayout.gt-sm="row"
+            fxLayoutAlign.gt-sm="space-between center"
+            style="
+                height: 60px !important;
+                min-height: 60px !important;
+                max-height: 60px !important;
+                color: white;
+            "
+        >
+            <!-- APP TITLE -->
+            <div
+                class="logo mb-24 mb-md-0"
+                fxLayout="row"
+                fxLayoutAlign="start center"
+            >
+                <mat-icon
+                    class="logo-icon s-32 mr-16"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '50ms', scale: '0.2' }
+                    }"
+                >
+                    {{ icon }}
+                </mat-icon>
+                <span
+                    class="logo-text h2"
+                    [@animate]="{
+                        value: '*',
+                        params: { delay: '100ms', x: '-25px' }
+                    }"
+                >
+                    {{ name }}
+                </span>
+            </div>
+            <!-- / APP TITLE -->
+
+            <!-- SEARCH -->
+            <div
+                class="search-wrapper mx-32 mx-md-0"
+                *ngIf="canSearch === 'true'"
+            >
+                <div
+                    class="search"
+                    fxFlex
+                    fxLayout="row"
+                    fxLayoutAlign="start center"
+                >
+                    <mat-icon>search</mat-icon>
+                    <input
+                        #filter
+                        [placeholder]="
+                            'AGENICES.SEARCH_PLACEHOLDER' | translate
+                        "
+                        id="search-agencies-by-name"
+                        (input)="termChanged($event.target.value)"
+                    />
+                </div>
+            </div>
+            <!-- / SEARCH -->
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <mat-table
+                class="products-table"
+                #table
+                [dataSource]="elements"
+                matSort
+                [@animateStagger]="{ value: '50' }"
+                fusePerfectScrollbar
+            >
+                <!-- ID Column -->
+                <li>
+                    <ng-container>
+                        <mat-cell
+                            fxFlex="2%"
+                            *matCellDef="let element"
+                            (click)="$event.stopPropagation()"
+                        >
+                            <p style="border: none; z-index: 3000">
+                                <mat-checkbox
+                                    class="example-margin"
+                                    [(ngModel)]="checked"
+                                ></mat-checkbox>
+                            </p>
+                        </mat-cell>
+                    </ng-container>
+                </li>
+
+                <li
+                    *ngFor="let column of displayedColumns; let i = index"
+                    [attr.data-index]="i"
+                >
+                    <ng-container matColumnDef="{{ displayedNames[i] }}">
+                        <mat-header-cell
+                            *matHeaderCellDef
+                            mat-sort-header
+                            [fxFlex]="column.width"
+                            (click)="sortTable(i)"
+                            >{{ displayedNames[i] }}
+                        </mat-header-cell>
+                        <ng-container
+                            *ngIf="!column.actions && !column.checkbox"
+                        >
+                            <mat-cell
+                                [fxFlex]="column.width"
+                                *matCellDef="let element"
+                            >
+                                <p *ngIf="column.icon === 'no'">
+                                    {{
+                                        formatEntry(
+                                            element[column.field],
+                                            column.pipe.fonction,
+                                            column.pipe.arg
+                                        )
+                                    }}
+                                </p>
+                                <mat-icon
+                                    *ngIf="
+                                        element[column.field] &&
+                                        column.icon === 'active'
+                                    "
+                                    class="active-icon green-600 s-16"
+                                    >check</mat-icon
+                                >
+                                <mat-icon
+                                    *ngIf="
+                                        !element[column.field] &&
+                                        column.icon === 'active'
+                                    "
+                                    class="active-icon red-500 s-16"
+                                    >close</mat-icon
+                                >
+                                <mat-icon
+                                    *ngIf="column.icon === 'mobile'"
+                                    class="active-icon default-color"
+                                    [ngClass]="{
+                                        'green-icon':
+                                            element[column.field] == true
+                                    }"
+                                    >mobile_screen_share
+                                </mat-icon>
+                                <mat-icon
+                                    *ngIf="
+                                        element[column.field] &&
+                                        column.icon === 'star' &&
+                                        toNumber(element[column.field]) > 0
+                                    "
+                                    class="active-icon gold-icon s-16"
+                                    >star_rate</mat-icon
+                                >
+                                <mat-icon
+                                    *ngIf="
+                                        element[column.field] &&
+                                        column.icon === 'star' &&
+                                        toNumber(element[column.field]) > 1
+                                    "
+                                    class="active-icon gold-icon s-16"
+                                    >star_rate</mat-icon
+                                >
+                                <mat-icon
+                                    *ngIf="
+                                        element[column.field] &&
+                                        column.icon === 'star' &&
+                                        toNumber(element[column.field]) > 2
+                                    "
+                                    class="active-icon gold-icon s-16"
+                                    >star_rate</mat-icon
+                                >
+                                <mat-icon
+                                    *ngIf="
+                                        element[column.field] &&
+                                        column.icon === 'star' &&
+                                        toNumber(element[column.field]) > 3
+                                    "
+                                    class="active-icon gold-icon s-16"
+                                    >star_rate</mat-icon
+                                >
+                                <mat-icon
+                                    *ngIf="
+                                        element[column.field] &&
+                                        column.icon === 'star' &&
+                                        toNumber(element[column.field]) > 4
+                                    "
+                                    class="active-icon gold-icon s-16"
+                                    >star_rate</mat-icon
+                                >
+                                <img
+                                    *ngIf="
+                                        element[column.field] &&
+                                        column.icon === 'image'
+                                    "
+                                    [src]="element[column.field]"
+                                    style="padding-right: 20px"
+                                />
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container *ngIf="column.actions">
+                            <mat-cell
+                                [fxFlex]="column.width"
+                                *matCellDef="let element"
+                                (click)="$event.stopPropagation()"
+                            >
+                                <p style="border: none; z-index: 3000">
+                                    <button
+                                        md-raised-button
+                                        *ngFor="let a of column.actions"
+                                        (click)="actionClick(a, element)"
+                                        style="border: none; z-index: 3000"
+                                    >
+                                        <mat-icon>{{ a }}</mat-icon>
+                                    </button>
+                                </p>
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container *ngIf="column.checkbox">
+                            <mat-cell
+                                [fxFlex]="column.width"
+                                *matCellDef="let element"
+                                (click)="$event.stopPropagation()"
+                            >
+                                <p style="border: none; z-index: 3000">
+                                    <mat-checkbox
+                                        class="example-margin"
+                                        [(ngModel)]="checked"
+                                    ></mat-checkbox>
+                                </p>
+                            </mat-cell>
+                        </ng-container>
+                    </ng-container>
+                </li>
+
+                <mat-header-row
+                    *matHeaderRowDef="displayedNames; sticky: true"
+                ></mat-header-row>
+
+                <mat-row
+                    *matRowDef="let element; columns: displayedNames"
+                    class="product"
+                    matRipple
+                    (click)="setSelectedElement(element)"
+                >
+                </mat-row>
+            </mat-table>
+
+            <mat-paginator
+                #paginator
+                [length]="total"
+                [pageIndex]="0"
+                [pageSize]="10"
+                [pageSizeOptions]="[5, 10, 25, 100]"
+                (page)="handlePage($event)"
+            >
+            </mat-paginator>
+        </div>
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>
+
+<button
+    mat-fab
+    class="accent"
+    id="add-button"
+    (click)="addClicked()"
+    aria-label="add"
+    [@animate]="{ value: '*', params: { delay: '300ms', scale: '.2' } }"
+    *ngIf="canAdd === 'true'"
+    style="position: fixed; z-index: 2000; bottom: 70px; right: 70px"
+>
+    <mat-icon>add</mat-icon>
+</button>
